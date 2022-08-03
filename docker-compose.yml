@@ -1,0 +1,37 @@
+version: "3"
+volumes:
+  db-store:
+  db-test-store:
+  php-fpm-socket:
+services:
+  app:
+    build: ./docker/php
+    volumes:
+      - php-fpm-socket:/var/run/php-fpm
+      - ./:/work/laravel
+  web:
+    build: ./docker/nginx
+    volumes:
+      - php-fpm-socket:/var/run/php-fpm
+      - ./:/work/laravel
+
+  db:
+    build: ./docker/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+  db-test:
+    build: ./docker/mysql
+    volumes:
+      - db-test-store:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=db
+      - PMA_USER=docker
+      - PMA_PASSWORD=docker
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
