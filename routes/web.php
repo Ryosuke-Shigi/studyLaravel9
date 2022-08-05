@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Tweet\IndexController;
-use App\Http\Controllers\Tweet\CreateController;
+use App\Http\Controllers\Tweet\IndexController as TweetIndexController;
+use App\Http\Controllers\Tweet\CreateController as TweetCreateController;
 use App\Http\Controllers\Tweet\TweetController;
 use App\Http\Controllers\Tweet\update\IndexController as UpdateIndexController;
 use App\Http\Controllers\Tweet\update\PutController as UpdatePutController;
+use App\Http\Controllers\Tweet\DeleteController as TweetDeleteController;
 
 
 /*
@@ -29,14 +30,15 @@ Route::get('/test/{id}/{ad}',function($sd,$sf) { return 'Hello'.$sd."   ".$sf;})
 //Route::get('/tweet/{name}',IndexController::class)->name('tweet.index');
 
 //tweet機能作成 シングルアクション
-Route::get('/tweet',IndexController::class)->name('tweet.index');
+Route::get('/tweet',TweetIndexController::class)->name('tweet.index');
 //tweet投稿機能
-Route::post('/tweet/create',CreateController::class)->name('tweet.create');
+Route::post('/tweet/create',TweetCreateController::class)->name('tweet.create');
 //tweet編集画面表示
 Route::get('/tweet/update/{tweetId}',UpdateIndexController::class)->name('tweet.update.index');
 //tweet編集処理
-Route::post('/tweet/update/{tweetId}',UpdatePutController::class)->name('tweet.update.put')->where('tweetId','[0-9]+');
-
+Route::put('/tweet/update/{tweetId}',UpdatePutController::class)->name('tweet.update.put')->where('tweetId','[0-9]+');
+//Tweet削除処理
+Route::delete('/tweet/delete/tweetId}',TweetDeleteController::class)->name('tweet.delete');
 
 
 /* Route::resource('tweet',TweetController::class, ['only' => [

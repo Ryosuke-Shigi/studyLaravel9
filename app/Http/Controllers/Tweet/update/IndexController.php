@@ -20,11 +20,19 @@ class IndexController extends Controller
     {
         //
         $tweetId = (int) $request->route('tweetId');
-        //Tweetのidを$tweetIdで抽出して一件だけ取得
+/*         //Tweetのidを$tweetIdで抽出して一件だけ取得
         $tweet = Tweet::where('id',$tweetId)->first();
         //$tweetの抽出結果がなければ
         if(is_null($tweet)) {
             throw new NotFoundHttpException('存在しないつぶやきです');
-        }
+        } */
+
+        //クエリビルダの取得でfirstOrFailの利用
+        //検索結果が存在しない場合は
+        //Illuminate\Database\Eloquent\ModelNotFoundExceptionの例外になる
+        //キャッチしない場合は、自動的に４０４エラーになる
+        $tweet = Tweet::where('id',$tweetId)->firstOrFail();
+
+        return view('tweet.update')->with('tweet',$tweet);
     }
 }
