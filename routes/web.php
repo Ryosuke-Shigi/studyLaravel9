@@ -41,6 +41,7 @@ Route::put('/tweet/update/{tweetId}',UpdatePutController::class)->name('tweet.up
 Route::delete('/tweet/delete/tweetId}',TweetDeleteController::class)->name('tweet.delete');
 
 
+
 /* Route::resource('tweet',TweetController::class, ['only' => [
     'index',
     'show',
