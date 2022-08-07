@@ -30,3 +30,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+
+Route::get('/test/{id}/{ad}',function($sd,$sf) { return 'Hello'.$sd."   ".$sf;});
+
+//Route::get('/tweet/{name}',IndexController::class)->name('tweet.index');
+
+//tweet機能作成 シングルアクション
+Route::get('/tweet',TweetIndexController::class)->name('tweet.index');
+//tweet投稿機能
+Route::post('/tweet/create',TweetCreateController::class)->name('tweet.create');
+//tweet編集画面表示
+Route::get('/tweet/update/{tweetId}',UpdateIndexController::class)->name('tweet.update.index');
+//tweet編集処理
+Route::put('/tweet/update/{tweetId}',UpdatePutController::class)->name('tweet.update.put')->where('tweetId','[0-9]+');
+//Tweet削除処理
+Route::delete('/tweet/delete/tweetId}',TweetDeleteController::class)->name('tweet.delete');
