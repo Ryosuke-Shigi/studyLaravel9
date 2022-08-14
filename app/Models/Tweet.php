@@ -16,4 +16,11 @@ class Tweet extends Model
     {
         return TweetFactory::new();
     }
+
+    //たった一つのUserと関連付けている
+    //UserからはhasManyで関連付けられている
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

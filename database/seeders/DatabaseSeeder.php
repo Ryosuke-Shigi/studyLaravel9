@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         //シーダーをコールする
-        $this->call(TweetSeeder::class);
+        $this->call([
+            UsersSeeder::class,
+            TweetSeeder::class,
+        ]);
     }
 }

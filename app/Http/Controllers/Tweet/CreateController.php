@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Tweet\CreateRequest;
 
+use App\Models\Tweet;
+
 class CreateController extends Controller
 {
     /**
@@ -20,6 +22,7 @@ class CreateController extends Controller
         //
         $tweet = new Tweet;
         $tweet->content=$request->tweet();
+        $tweet->user_id = $request->userId();
         $tweet->save();
         return redirect()->route('tweet.index');
     }

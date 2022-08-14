@@ -39,11 +39,15 @@ Route::get('/test/{id}/{ad}',function($sd,$sf) { return 'Hello'.$sd."   ".$sf;})
 
 //tweet機能作成 シングルアクション
 Route::get('/tweet',TweetIndexController::class)->name('tweet.index');
-//tweet投稿機能
-Route::post('/tweet/create',TweetCreateController::class)->name('tweet.create');
-//tweet編集画面表示
-Route::get('/tweet/update/{tweetId}',UpdateIndexController::class)->name('tweet.update.index');
-//tweet編集処理
-Route::put('/tweet/update/{tweetId}',UpdatePutController::class)->name('tweet.update.put')->where('tweetId','[0-9]+');
-//Tweet削除処理
-Route::delete('/tweet/delete/tweetId}',TweetDeleteController::class)->name('tweet.delete');
+
+Route::middleware('auth')->prefix('/tweet')->as('tweet.')->group(function () {
+    //tweet投稿機能
+    Route::post('/create',TweetCreateController::class)->name('create');
+    //tweet編集画面表示
+    Route::get('/update/{tweetId}',UpdateIndexController::class)->name('update.index');
+    //tweet編集処理
+    Route::put('/update/{tweetId}',UpdatePutController::class)->name('update.put')->where('tweetId','[0-9]+');
+    //Tweet削除処理
+    Route::delete('/delete/tweetId}',TweetDeleteController::class)->name('delete');
+
+});

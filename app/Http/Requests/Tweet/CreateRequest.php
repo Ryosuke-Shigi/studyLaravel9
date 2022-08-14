@@ -39,4 +39,15 @@ class CreateRequest extends FormRequest
         //Requestのtweet部分を引っ張り出す
         return $this->input('tweet');
     }
+
+    /**
+     *  Requestクラスのuser関数でログインしているユーザを取得、返す
+     *
+     */
+    public function userId(): int
+    {
+        return $this->user()->id;
+    }
+
+
 }
