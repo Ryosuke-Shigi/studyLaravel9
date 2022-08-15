@@ -51,7 +51,7 @@
         </div>
 
 
-{{--         <div>
+        <div>
             <form action="{{ route('tweet.delete', ['tweetId'=>$tweetId]) }}" method="post" onclick="return confirm('削除してもよろしいですか？');">
                 @method('DELETE')
                 @csrf
@@ -62,7 +62,7 @@
                     <span>削除</span>
                 </butotn>
             </form>
-        </div> --}}
+        </div>
 
 
     </div>
